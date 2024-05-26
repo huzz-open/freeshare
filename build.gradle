@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.huzz'
+version = '1.0-SNAPSHOT'
+
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    implementation 'org.apache.pdfbox:pdfbox:3.0.2'
+    implementation 'com.github.jai-imageio:jai-imageio-core:1.4.0'
+    implementation 'com.github.jai-imageio:jai-imageio-jpeg2000:1.4.0'
+    implementation 'org.apache.pdfbox:jbig2-imageio:3.0.4'
+    implementation 'com.afrozaar.wordpress:wp-api-v2-client-java:4.8.1'
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.3.0'
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor  'org.projectlombok:lombok:1.18.32'
+
+}
+
+allprojects {
+    repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/public/'
+        }
+        mavenCentral()
+    }
+
+    compileJava {
+        options.encoding = 'UTF-8'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
