@@ -1,4 +1,4 @@
-package org.huzz.quark.resp;
+package org.huzz.freeshare.quark.dto;
 
 import lombok.Getter;
 import lombok.Setter;

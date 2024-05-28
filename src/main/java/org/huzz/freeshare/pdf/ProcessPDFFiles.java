@@ -1,4 +1,4 @@
-package org.huzz.pdf;
+package org.huzz.freeshare.pdf;
 
 /**
  * @author chenji
@@ -14,7 +14,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ProcessPDFFiles {
@@ -28,7 +27,7 @@ public class ProcessPDFFiles {
         File directory = new File(directoryPath);
         processFilesInDirectory(directory);
 
-        executorService.awaitTermination(60, TimeUnit.SECONDS);
+        executorService.shutdown();
     }
 
     private static void processFilesInDirectory(File directory) {
