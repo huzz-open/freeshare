@@ -14,19 +14,17 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class ProcessPDFFiles {
 
-    static ExecutorService executorService = Executors.newFixedThreadPool(10);
-    static AtomicInteger c = new AtomicInteger();
+    static ExecutorService executorService = Executors.newFixedThreadPool(5);
 
-    public static void main(String[] args) throws InterruptedException {
-        String directoryPath = "C:\\data\\documents\\电子书\\标准图书\\";  // 替换为您的目录路径
+    static String inputDir = "C:\\data\\documents\\电子书\\副业";
+    static String outputDir = "C:\\data\\documents\\电子书\\副业-封面";
 
-        File directory = new File(directoryPath);
+    public static void main(String[] args) {
+        File directory = new File(inputDir);
         processFilesInDirectory(directory);
-
         executorService.shutdown();
     }
 
@@ -38,7 +36,6 @@ public class ProcessPDFFiles {
                     processFilesInDirectory(file);  // 递归处理子目录
                 } else {
                     executorService.submit(() -> {
-                        c.incrementAndGet();
                         processFile(file);
                     });
                 }
@@ -59,7 +56,7 @@ public class ProcessPDFFiles {
 
             // 保存图像
             String outputFileName = file.getName() + ".png";
-            File outputImage = new File("C:\\data\\documents\\电子书\\封面", outputFileName);
+            File outputImage = new File(outputDir, outputFileName);
             ImageIO.write(image, "PNG", outputImage);
 
             // 关闭文档
